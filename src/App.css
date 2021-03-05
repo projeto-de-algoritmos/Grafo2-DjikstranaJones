@@ -1,11 +1,12 @@
 .app {
   text-align: center;
-  background-color: #DE8E49;
-  height: 100vh;
+  background-color: #f9f5e3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .title{
@@ -20,4 +21,17 @@
   font-weight: 700;
   width: 20vw;
   color: #f9f5e3;
+}
+
+.board{
+  width: 30vw;
+  height: 30vh;
+  background-color: #de8e49;
+}
+
+
+.field {
+  height: 100px;
+  width: 100px;
+  border-style: solid;
 }
