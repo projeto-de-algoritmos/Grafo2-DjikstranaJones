@@ -1,30 +1,34 @@
 import Node from "./Node";
 export default class Graph {
   constructor() {
-    this.nodes = new Map();
-    this.neighbor = new Map();
+    this.houses = {};
   }
 
-  addNode() {
-    let nodePhrase = "";
-    for (let i = 0; i < this.column; i++) {
-      for (let j = 0; j < this.row; j++)
-        nodePhrase += i.toString() + "," + j.toString() + " ";
-    }
-    nodePhrase = nodePhrase.split(" ");
-    nodePhrase.map((node) => this.nodes.set(node, new Node(node)));
+  addWeights() {
+    const edges = [
+      { A: 0, B: 0, C: 0 },
+      { C: 0, D: 0, E: 0 },
+      { A: 0, D: 0 },
+      { D: 0, G: 0 },
+      { E: 0, F: 0, G: 0 },
+      { H: 0, G: 0 },
+      { G: 0, E: 0 },
+      { I: 0, finish: 0 },
+      { I: 0, finish: 0 },
+      { finish: 0 },
+      {},
+    ];
+    const nodes = "start A B C D E F G H I finish".split(" ");
+    const weights = [];
+    edges.forEach((e) => {
+      weights.push(Object.values(e).map(() => Math.ceil(Math.random() * 10)));
+    });
+    nodes.forEach((key, index) => {
+      this.houses[key] = weights[index];
+    });
   }
 
-  addNeighbor() {
-    for (let i = 0; i < this.column; i++)
-      for (let j = 0; j < this.row; j++) {
-        let neighbor = [];
-        if (j < this.column - 1) neighbor.push(`${i},${j + 1}`);
-        if (j > 0) neighbor.push(`${i},${j - 1}`);
-        if (i > 0) neighbor.push(`${i - 1},${j}`);
-        if (i < this.row - 1) neighbor.push(`${i + 1},${j}`);
-        this.neighbor.set(`${i},${j}`, neighbor);
-      }
+  getGraph() {
+    return this.houses;
   }
-
 }
