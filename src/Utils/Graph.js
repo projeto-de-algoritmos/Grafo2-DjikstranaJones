@@ -1,4 +1,3 @@
-import Node from "./Node";
 export default class Graph {
   constructor() {
     this.houses = {};
@@ -20,11 +19,15 @@ export default class Graph {
     ];
     const nodes = "start A B C D E F G H I finish".split(" ");
     const weights = [];
-    edges.forEach((e) => {
+    edges.forEach((e, index) => {
+      let neighbor = {};
+      const key = Object.keys(e);
       weights.push(Object.values(e).map(() => Math.ceil(Math.random() * 10)));
-    });
-    nodes.forEach((key, index) => {
-      this.houses[key] = weights[index];
+      weights[index].forEach((x, i) => {
+        neighbor[key[i]] = x;
+      });
+      this.houses[nodes[index]] = neighbor;
+      neighbor = {};
     });
   }
 
