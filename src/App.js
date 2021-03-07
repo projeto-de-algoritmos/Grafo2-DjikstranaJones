@@ -13,6 +13,8 @@ import useSound from "use-sound";
 function App() {
   const [start, setStart] = useState(false);
   const graph = new Graph();
+  graph.addWeights();
+  console.log(graph.houses);
 
   const [isArrowsVisible, setArrowsVisible] = useState(false);
 
@@ -34,7 +36,8 @@ function App() {
 
   const renderColumn = (row) => {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((column) => (
-      <div>
+      <div >
+        <p>{`${column}, ${row}`}</p>
         {positions.includes(`${column}${row}`)
           ? renderImg(column, row)
           : renderField(column, row)}
@@ -44,11 +47,14 @@ function App() {
 
   const renderImg = (column, row) => {
     return (
-      <img
-        src={`${column}${row}` !== "91" ? firehouse : idol}
-        className="firehouseImg"
-        id={`${column}${row}`}
-      />
+      <div  className="firehouseContainer">
+        
+        <img
+          src={`${column}${row}` !== "91" ? firehouse : idol}
+          id={`${column}${row}`}
+          className="firehouseImg"
+        />
+      </div>
     );
   };
 
@@ -71,22 +77,33 @@ function App() {
   };
 
   const renderArrows = () => {
-    graph.addWeights();
-    console.log(graph.houses);
-    return positions.map((coord, index) => (
-      <div>
-        {index !== positions.length - 1 ? (
+    let cont=0;
+    return positions.map((coord) => {
+      cont = 0;
+      return Object.keys(graph.houses[coord]).map((neighbor, index)=>{
+        cont++;
+        let start = cont==1?"right": cont==2?"top": cont==3?"bottom" : "left";
+        let end = "auto";
+       return <div>
           <Xarrow
             start={coord}
-            end={positions[index + 1]}
+            end={neighbor}
+            startAnchor={{position: start}}
+            endAnchor={{position: end }}
+            strokeWidth={2.5}
+            // path={""}
+            curveness={0.2}
+            label={{start:
+            <div>
+              <p className="labelArrow">{`${Object.values(graph.houses[coord])[index]}`}</p>
+            </div>}}
             headSize={0}
             lineColor={"#4e973f"}
+            // dashness={{ strokeLen: 10, nonStrokeLen: 15, animation: -2 }}
           />
-        ) : (
-          <div></div>
-        )}
       </div>
-    ));
+      })
+    });
   };
 
   return (
@@ -106,10 +123,13 @@ function App() {
       </Text>
       <HStack className="horizontalBox">
         <img src={indianaJones} className="indianaJones" />
-        <div className="board">{renderTable()}</div>
+        <div className="board">
+
+      {isArrowsVisible ? renderArrows() : <div></div>}
+          {renderTable()}
+          </div>
         <img src={goddamnCowboy} className="indianaJones" />
       </HStack>
-      {isArrowsVisible ? renderArrows() : <div></div>}
       <HStack mt="10px">
         <Button
           onClick={() => {

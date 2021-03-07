@@ -39,10 +39,21 @@
   height: 5vw;
   width: 5vw;
 }
+
+.firehouseContainer {
+  margin: 1vw;
+  height: 6vw;
+  width: 6vw;
+}
 .firehouseImg {
-  margin: 2.5vw;
-  height: 4vw;
-  width: 4vw;
+  height: 5vw;
+  width: 5vw;
+}
+
+.labelArrow{
+  font-size: 1.5rem;
+  font-weight:700;
+  color: #54331d;
 }
 
 .firehouseImg:hover {
