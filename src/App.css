@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -24,14 +25,25 @@
 }
 
 .board{
-  width: 30vw;
-  height: 30vh;
-  background-color: #de8e49;
+  background-color: #a96d44;
+  display: flex;
+  flex-direction: column;
 }
 
+.cross{
+  display: flex;
+}
 
 .field {
-  height: 100px;
-  width: 100px;
-  border-style: solid;
+  height: 5vw;
+  width: 5vw;
+}
+.firehouseImg{
+  margin: 2.5vw;
+  height: 4vw;
+  width: 4vw;
+}
+
+.firehouseImg:hover{
+  background-color: wheat;
 }
