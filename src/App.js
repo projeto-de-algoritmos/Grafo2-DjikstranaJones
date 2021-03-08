@@ -12,20 +12,21 @@ import useSound from "use-sound";
 import indianaJonesSprite from './assets/indianajonessprite.png';
 import checkDijkstra from './utils/checkDijkstra.js';
 
+const graph = new Graph();
+graph.addWeights();
+const dijkstra = graph.dijkstra();
+
 function App() {
   const [start, setStart] = useState(false);
   const [gameIsEnd, setGameIsEnd] = useState(false);
   const [userWon, setUserWon] = useState(false);
   const [userLose, setUserLose] = useState(false);
-  const graph = new Graph();
   const [counter, setCounter] = useState(1);
-  graph.addWeights();
-  const dijkstra = graph.dijkstra();
   console.log(graph.houses);
 
   const [isArrowsVisible, setArrowsVisible] = useState(false);
 
-  const [playMusic] = useSound(musicTheme, { volume: 0.0 });
+  const [playMusic] = useSound(musicTheme, { volume: 0.5 });
 
   let positions = [
     "01",
@@ -44,7 +45,6 @@ function App() {
   const renderColumn = (row) => {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((column) => (
       <div>
-        <p>{column}{row}</p>
         {positions.includes(`${column}${row}`)
           ? renderImg(column, row)
           : renderField(column, row)}
@@ -61,7 +61,7 @@ function App() {
           setCounter(counter+1);
           console.log(counter);
           console.log(dijkstra.path.length);
-          if(counter == dijkstra.path.length+1){
+          if(counter === dijkstra.path.length-1){
             setGameIsEnd(true);
             setUserWon(true);
           }
