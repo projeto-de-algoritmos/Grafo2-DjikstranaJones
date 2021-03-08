@@ -9,7 +9,8 @@ import Xarrow from "react-xarrows";
 import Graph from "./utils/Graph";
 import musicTheme from "./assets/musicTheme.mp3";
 import useSound from "use-sound";
-import checkArray from './utils/checkArray.js';
+import indianaJonesSprite from './assets/indianajonessprite.png';
+import checkDijkstra from './utils/checkDijkstra.js';
 
 function App() {
   const [start, setStart] = useState(false);
@@ -17,6 +18,7 @@ function App() {
   const [userWon, setUserWon] = useState(false);
   const [userLose, setUserLose] = useState(false);
   const graph = new Graph();
+  const [counter, setCounter] = useState(1);
   graph.addWeights();
   const dijkstra = graph.dijkstra();
   console.log(graph.houses);
@@ -42,6 +44,7 @@ function App() {
   const renderColumn = (row) => {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((column) => (
       <div>
+        <p>{column}{row}</p>
         {positions.includes(`${column}${row}`)
           ? renderImg(column, row)
           : renderField(column, row)}
@@ -52,11 +55,24 @@ function App() {
   const renderImg = (column, row) => {
     return (
       <div className="firehouseContainer" onClick={() => {
-        // checkArray(column, row, )
-        // console.log(dijkstra);
+        console.log(dijkstra.path);
+        if(`${column}${row}` !== '01'){
+        if(checkDijkstra(column, row, dijkstra.path, counter)){
+          setCounter(counter+1);
+          console.log(counter);
+          console.log(dijkstra.path.length);
+          if(counter == dijkstra.path.length+1){
+            setGameIsEnd(true);
+            setUserWon(true);
+          }
+        }
+        else {
+          setUserLose(true);
+          setGameIsEnd(true);
+        }}
       }}>
         <img
-          src={`${column}${row}` !== "91" ? firehouse : idol}
+          src={`${column}${row}` == "91" ?idol: `${column}${row}`=="01"? indianaJonesSprite : firehouse  }
           id={`${column}${row}`}
           className="firehouseImg"
         />
@@ -163,6 +179,7 @@ function App() {
           onClick={() => {
             setArrowsVisible(true);
             playMusic();
+            // setGameIsEnd(true);
             setStart(true);
           }}
           disabled={start}
