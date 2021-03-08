@@ -56,13 +56,14 @@ function App() {
       <div className="firehouseContainer"
       id={`d${column}${row}`}
       onClick={() => {
+        if(start){
         console.log(dijkstra.path);
         if(`${column}${row}` !== '01'){
         if(checkDijkstra(column, row, dijkstra.path, counter)){
           setCounter(counter+1);
           console.log(counter);
           console.log(dijkstra.path.length);
-        const myDiv = document.getElementById(`d${column}${row}`);
+        const myDiv = document.getElementById(`${column}${row}`);
         myDiv.style.backgroundColor = "#21a530";
           if(counter === dijkstra.path.length-1){
             setGameIsEnd(true);
@@ -72,6 +73,8 @@ function App() {
         else {
           setGameIsEnd(true);
         }}
+          
+      }
       }}>
         <img
           src={`${column}${row}` == "91" ?idol: `${column}${row}`=="01"? indianaJonesSprite : firehouse  }
@@ -135,7 +138,6 @@ function App() {
               }}
               headSize={0}
               lineColor={"#4e973f"}
-              // dashness={{ strokeLen: 10, nonStrokeLen: 15, animation: -2 }}
             />
           </div>
         );
