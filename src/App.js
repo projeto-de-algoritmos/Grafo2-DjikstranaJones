@@ -155,10 +155,13 @@ function App() {
         Os bandidos destruíram todas as casas em busca do ídolo perdido. E nosso
         herói, Dijkstrana Jones, sabe exatamente onde o ídolo perdido está
         escondido, porém não sabe qual é o melhor caminho até o tesouro.
+
       </Text>
       <Text fontSize="lg" textAlign="center" px="25%" color="#54331d" mb="25px">
         É uma corrida contra o tempo até que os bandidos encontrem o ídolo,
         ajude nosso herói a chegar ao tesouro e escapar são e salvo.
+        <br/>
+        Clique nas casinhas que Dijkstrana terá que passar para fazer o menor caminho.
       </Text>
       <HStack className="horizontalBox">
         <img src={indianaJones} className="indianaJones" />
