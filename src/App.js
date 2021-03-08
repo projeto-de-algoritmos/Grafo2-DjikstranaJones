@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, setState } from "react";
-import { Button, HStack, Text } from "@chakra-ui/react";
+import { Button, HStack, Text, VStack } from "@chakra-ui/react";
 import indianaJones from "./assets/indianaJones.png";
 import goddamnCowboy from "./assets/goddamnCowboy.png";
 import firehouse from "./assets/firehouse.png";
@@ -20,7 +20,6 @@ function App() {
   const [start, setStart] = useState(false);
   const [gameIsEnd, setGameIsEnd] = useState(false);
   const [userWon, setUserWon] = useState(false);
-  const [userLose, setUserLose] = useState(false);
   const [counter, setCounter] = useState(1);
   console.log(graph.houses);
 
@@ -54,20 +53,23 @@ function App() {
 
   const renderImg = (column, row) => {
     return (
-      <div className="firehouseContainer" onClick={() => {
+      <div className="firehouseContainer"
+      id={`d${column}${row}`}
+      onClick={() => {
         console.log(dijkstra.path);
         if(`${column}${row}` !== '01'){
         if(checkDijkstra(column, row, dijkstra.path, counter)){
           setCounter(counter+1);
           console.log(counter);
           console.log(dijkstra.path.length);
+        const myDiv = document.getElementById(`d${column}${row}`);
+        myDiv.style.backgroundColor = "#21a530";
           if(counter === dijkstra.path.length-1){
             setGameIsEnd(true);
             setUserWon(true);
           }
         }
         else {
-          setUserLose(true);
           setGameIsEnd(true);
         }}
       }}>
@@ -162,9 +164,15 @@ function App() {
           gameIsEnd?
           (
             userWon?
+            <VStack>
+            <Text fontSize={36}> Você ganhou </Text>
             <img src="https://i.gifer.com/4o8.gif"/>
+            </VStack>
             :
+            <VStack>
+            <Text fontSize={36}> Você perdeu </Text>
             <img src="https://i.pinimg.com/originals/bf/47/a9/bf47a9ef02a8040f7697e63afface03e.gif"/>
+            </VStack>
           )
           :
         <div className="board">
