@@ -21,8 +21,6 @@ function App() {
   const [gameIsEnd, setGameIsEnd] = useState(false);
   const [userWon, setUserWon] = useState(false);
   const [counter, setCounter] = useState(1);
-  console.log(graph.houses);
-
   const [isArrowsVisible, setArrowsVisible] = useState(false);
 
   const [playMusic] = useSound(musicTheme, { volume: 0.5 });
@@ -57,12 +55,9 @@ function App() {
       id={`d${column}${row}`}
       onClick={() => {
         if(start){
-        console.log(dijkstra.path);
         if(`${column}${row}` !== '01'){
         if(checkDijkstra(column, row, dijkstra.path, counter)){
           setCounter(counter+1);
-          console.log(counter);
-          console.log(dijkstra.path.length);
         const myDiv = document.getElementById(`${column}${row}`);
         myDiv.style.backgroundColor = "#21a530";
           if(counter === dijkstra.path.length-1){

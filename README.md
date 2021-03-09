@@ -16,16 +16,18 @@ O objetivo do projeto é a aplicação dos conteúdos da disciplina Projeto de A
 
 ## Screenshots
 
+<img src="./screenshoots/screen1.png">
+<img src="./screenshoots/screen2.png">
+<img src="./screenshoots/screen3.png">
+
 ## Instalação 
 **Linguagem**: Javascript<br>
 **Framework**: ReactJS<br>
 Para rodar o projeto você precisará instalar na sua máquina:
 - [Node.js](https://nodejs.org/en/)
-- [Yarn](https://yarnpkg.com/)*
+- [Yarn](https://yarnpkg.com/)
 
-\* A instalação do yarn não é obrigatória, porém por ser mais estável é preferível a sua utilização.
-
-Para rodar o projeto basta entrar na pasta graphs e executar os seguintes comandos
+Para rodar o projeto basta executar os seguintes comandos
 
 **Utilizando yarn**
 ```
@@ -33,11 +35,6 @@ yarn
 yarn start
 ```
 
-**Utilizando npm**
-```
-npm install
-npm start
-```
 
 ## Uso 
 Após executar automaticamente ele abrirá uma aba no seu navegador com o projeto rodando, caso isto não aconteça basta acessar seu localhost com a porta indicada no terminal ao executar os comandos.

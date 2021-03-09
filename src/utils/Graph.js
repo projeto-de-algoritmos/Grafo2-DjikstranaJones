@@ -78,10 +78,6 @@ export default class Graph {
       betsPath.unshift(parent);
       parent = parents[parent];
     }
-    console.log({
-      distance: weights["91"],
-      path: betsPath,
-    });
     return {
       distance: weights["91"],
       path: betsPath,
